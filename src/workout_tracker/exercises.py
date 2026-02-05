@@ -95,3 +95,40 @@ class CardioExercise(Exercise):
     def __str__(self) -> str:
         """Return detailed string representation."""
         return f"{self.name} ({self.distance} miles, {self.duration} min): {self.calculate_calories()} calories"
+    
+
+class StrengthExercise(Exercise):
+    """This class will track weight, reps, and sets
+    
+    Attributes:
+        name (str): Exercise name
+        date (str): Date performed
+        weight( (float): Pounds lifted
+        reps (int): Repititions per set
+        sets (int): Number of sets 
+    """
+
+    def __init__(self, name: str, weight: float, reps: int, sets: int, date: str = None):
+        # calls the parent function 
+        super().__init__(name, date)
+
+        # stores all the information for the different attributes 
+        self.weight = weight
+        self.reps = reps
+        self.sets = sets 
+
+    def calculate_calories(self) -> float:
+        """Calculates your calories burned with a certain formula"""
+        return self.weight * self.reps * self.sets * 0.05
+    
+    def get_duration(self) -> float:
+        """Gets the duration of your exercise using a certain formula"""
+        return self.sets * 3
+    
+    def __str__(self) -> str:
+        """Returns the details of your workout in a string"""
+        calories = self.calculate_calories()
+        return (
+            f"{self.name} ({self.weight} lbs x {self.reps} reps x "
+            f"{self.sets} sets): {calories:.0f} calories"
+        )
